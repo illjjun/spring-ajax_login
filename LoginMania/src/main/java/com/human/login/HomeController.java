@@ -33,8 +33,12 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		return "home";
+	}
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home2(Locale locale, Model model) {
 		return "home";
 	}
 	@RequestMapping("/login")
@@ -49,7 +53,7 @@ public class HomeController {
 		id.updateLogout(userid);
 		
 		session.invalidate();
-		return "redirect:/home"; 
+		return "redirect:/"; 
 	}
 	@RequestMapping(value="/finish_login")
 	public String finish_login(HttpServletRequest hsr,Locale locale, Model model) {
@@ -106,7 +110,7 @@ public class HomeController {
 		String userid=hsr.getParameter("userid");
 		String passcode=hsr.getParameter("passcode");
 		String[] interest=hsr.getParameterValues("interest");
-		//interest 배열을 하나의 문자열로 변환하는 코드가 들어가야한다
+
 		String interest1 = "";
 		
 		
@@ -123,7 +127,6 @@ public class HomeController {
 		retval="ok";
 	}catch(Exception e) {
 		retval="fail";
-		System.out.println("실패");
 	}
 		return "home";
 

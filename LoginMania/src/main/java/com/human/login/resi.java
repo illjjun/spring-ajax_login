@@ -1,7 +1,7 @@
 package com.human.login;
 
 public class resi {
-	String userid;
+	private String userid;
 
 	public resi() {
 		super();

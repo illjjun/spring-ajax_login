@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td colspan=4 align=center>
-                <input type=submit value='가입완료'>&nbsp;
+                <input type=submit value='가입완료' id=resisub>&nbsp;
                 <input type=reset value='다시입력'>
             </td>
         </tr>
@@ -58,20 +58,35 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
+let flag2="false"
 $(document)
+
+.on('submit',function(){
+	if($('input[name=name]').val()==''){alert('이름을 입력');return false;}
+	if($('input[name=userid]').val()==''){alert('아이디를 입력');return false;}
+	if($('input[name=passcode]').val()==''){alert('비밀번호를 입력');return false;}
+	if($('input[name=passcode1]').val()==''){alert('비밀번호 확인을 입력');return false;}
+	if($('input[name=passcode1]').val()!=$('input[name=passcode]').val()){alert('비밀번호와 비밀번호확인이 다름!');return false;};
+	if($('input:radio[name=gender]').is(":checked")==false){alert('성별을 고르시오');return false;}
+	if($('input:checkbox[name=interest]').is(":checked")==false){alert('관심분야를 고르시오');return false;}
+	if(flag2=="false"){alert('아이디를 중복체크하세요');return false;}
+})
 .on('click','#id_check',function(){
+	let flag="";
 	$.post("/login/id_check",{},function(txt){
-		console.log(txt);
 		for(i=0;i<txt.length;i++){
 			if(txt[i]['userid']==$('#userid').val()){
-				alert("아이디가 중복됩니다.")
+				flag="nope";
 				break;
-				
+			}else if($('#userid').val()==''){
+				alert("아이디를 입력하세요.")
+				break;
 			}else{
-				alert("사용가능한 아이디입니다.")
+				flag="good";
 			}
-			console.log(i)
 		}
+		if(flag=="nope")alert("아이디가 중복됩니다.")
+		else if(flag=="good")alert("사용가능한 아이디입니다."); flag2="true";
 	},'json');
 	})
 

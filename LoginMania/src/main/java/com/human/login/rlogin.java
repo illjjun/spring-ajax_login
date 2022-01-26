@@ -1,8 +1,8 @@
 package com.human.login;
 
 public class rlogin {
-	String userid;
-	String passcode;
+	private String userid;
+	private String passcode;
 	
 	public rlogin() {
 		super();

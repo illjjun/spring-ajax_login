@@ -21,12 +21,5 @@
 <update id="updateLogout">
 	update member set logout_time=to_char(sysdate,'YY/MM/DD/HH:MI') where userid=#{param1}
 </update>
-<delete id="deleteMenu">
-	delete from menu where code=#{param1}
-</delete>
-<insert id="insertSales">
-	insert into cafe_sales(code,menu_code,qty,price,sold_time,mobile) 
-	values(seq_code.nextval,#{param1},#{param2},#{param3},to_char(sysdate,'YYYYMMDDHHMI'),#{param4})
-</insert>
 
 </mapper> 
