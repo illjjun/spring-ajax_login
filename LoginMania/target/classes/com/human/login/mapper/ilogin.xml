@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper을 써야 인터페이스를 찾아낼 수 있음 -->
+<mapper namespace="com.human.login.ilogin"> 
+<!-- <select id="getMenuList" resultType="com.human.login.Member"> -->
+<!-- 	select code,name,price from menu order by code -->
+<!-- </select> -->
+<insert id="resistor">
+	insert into member(name,gender,userid,passcode,interest) values(#{param1},#{param2},#{param3},#{param4},#{param5})
+</insert>
+<select id="id_check" resultType="com.human.login.resi">
+	select userid from member
+</select>
+<select id="login_check" resultType="com.human.login.rlogin">
+	select userid,passcode from member
+</select>
+<update id="updateLogin">
+	update member set login_time=to_char(sysdate,'YY/MM/DD/HH:MI') where userid=#{param1}
+</update>
+<update id="updateLogout">
+	update member set logout_time=to_char(sysdate,'YY/MM/DD/HH:MI') where userid=#{param1}
+</update>
+<delete id="deleteMenu">
+	delete from menu where code=#{param1}
+</delete>
+<insert id="insertSales">
+	insert into cafe_sales(code,menu_code,qty,price,sold_time,mobile) 
+	values(seq_code.nextval,#{param1},#{param2},#{param3},to_char(sysdate,'YYYYMMDDHHMI'),#{param4})
+</insert>
+
+</mapper> 
